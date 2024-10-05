@@ -23,6 +23,6 @@ def read_users():
 
 @app.put('/users/{user_id}', response_model=UserPublic)
 def update_user(user_id: int, user: UserSchema):
-    user_with_id = UserDB(id=len(database) + 1, **user.model_dump())
+    user_with_id = UserDB(id=user_id, **user.model_dump())
     database[user_id - 1] = user_with_id
     return user_with_id
