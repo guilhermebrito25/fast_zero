@@ -15,3 +15,7 @@ class UserPublic(BaseModel):  # Schema de resposta publica do usuario
     id: int
     username: str
     email: EmailStr
+
+
+class UserList(BaseModel):
+    users: list[UserPublic]
