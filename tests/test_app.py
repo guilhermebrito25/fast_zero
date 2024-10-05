@@ -47,3 +47,16 @@ def test_update_user(client):
         'email': 'test@test.com',
         'id': 1,
     }
+
+
+def test_raise_update_user(client):
+    response = client.put(
+        '/users/0',
+        json={
+            'password': '123',
+            'username': 'testusername2',
+            'email': 'test@test.com',
+            'id': 1,
+        },
+    )
+    assert response.json() == {'detail': 'Usuario não encontrado'}
