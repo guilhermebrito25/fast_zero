@@ -7,15 +7,15 @@ class UserSchema(BaseModel):  # Schema de criação do usuario
     password: str
 
 
-class UserDB(UserSchema):
+class UserDB(UserSchema): # Schema para adicionar no BD
     id: int
 
 
-class UserPublic(BaseModel):  # Schema de resposta publica do usuario
+class UserPublic(BaseModel):  # Schema de resposta publica do usuario ao ser criado
     id: int
     username: str
     email: EmailStr
 
 
-class UserList(BaseModel):
+class UserList(BaseModel): # Schema de resposta publica do usuario ao ser requisitado todos
     users: list[UserPublic]
