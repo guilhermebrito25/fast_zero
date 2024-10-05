@@ -5,8 +5,19 @@ from fastapi.testclient import TestClient
 from fast_zero.app import app
 
 
-def test_read_root_retorna_ok_and_ola_mundo():
+def test_create_user():
     client = TestClient(app)
-    response = client.get('/')
-    assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'Message': 'Olá, mundo'}
+    response = client.post(
+        '/users',
+        json={
+            'username': 'testusername',
+            'password': 'password',
+            'email': 'test@test.com',
+        },
+    )
+    assert response.status_code == HTTPStatus.CREATED
+    assert response.json() == {
+        'username': 'testusername',
+        'email': 'test@test.com',
+        'id': 1,
+    }
