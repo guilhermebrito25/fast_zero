@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
 from fast_zero.models import User, table_registry
@@ -18,6 +18,9 @@ def test_creat_user():
 
         session.add(user)
         session.commit()
-        session.refresh(user)
 
-    assert user.id == 1
+        result = session.scalar(
+            select(User).where(User.email == 'guilherme2@gmail.com')
+        )
+
+    assert result.username == 'Guilherme'
